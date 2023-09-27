@@ -30,7 +30,9 @@ namespace KiemThu.UnitTests
         [TestCase(1, int.MaxValue, int.MaxValue + (long)1)]
         [TestCase(0, 0, 0)]  
         [TestCase(-5, -2, -7)] 
-        [TestCase(100, -100, 0)] 
+        [TestCase(100, -100, 0)]
+        [TestCase(int.MaxValue, int.MaxValue, long.MaxValue)]
+
         public void Add_ValidInput_Sum2Digit(int x, int y, long expectedResult)
         {
             //Arrange
@@ -55,8 +57,11 @@ namespace KiemThu.UnitTests
         [TestCase(0, 0, 0)]
         [TestCase(-5, -2, -3)]
         [TestCase(10, -5, 15)]  
-        [TestCase(100, 100, 0)]  
-        public void Subtract_ValidInput_Subtract2Numbers(int x, int y, int expectedResult)
+        [TestCase(100, 100, 0)]
+        [TestCase(int.MaxValue, int.MinValue, (long)int.MaxValue + (long)int.MinValue)]
+        [TestCase(int.MinValue, int.MaxValue, (long)int.MinValue - (long)int.MaxValue)]
+
+        public void Subtract_ValidInput_Subtract2Numbers(int x, int y, long expectedResult)
         {
             //Arrange
             Calculator calculator = new Calculator();
@@ -79,8 +84,10 @@ namespace KiemThu.UnitTests
         [TestCase(10, 0, 0)]
         [TestCase(7, -2, -14)]  
         [TestCase(100, 1, 100)]  
-        [TestCase(1, 1, 1)] 
-        public void Multiply_ValidInput_Multiply2Numbers(int x, int y, int expectedResult)
+        [TestCase(1, 1, 1)]
+        [TestCase(int.MaxValue, int.MaxValue, (long)int.MaxValue * (long)int.MaxValue)]
+        [TestCase(int.MinValue, int.MinValue, (long)int.MinValue * (long)int.MinValue)]
+        public void Multiply_ValidInput_Multiply2Numbers(int x, int y, long expectedResult)
         {
             // Arrange
             Calculator calculator = new Calculator();
@@ -103,8 +110,11 @@ namespace KiemThu.UnitTests
         [TestCase(-10, -2, 5)]
         [TestCase(100, 20, 5)]  
         [TestCase(-100, 20, -5)]  
-        [TestCase(0, 1, 0)]  
-        public void Divide_ValidInput_Divide2Numbers(int x, int y, int expectedResult)
+        [TestCase(0, 1, 0)]
+        [TestCase(int.MaxValue, 1, int.MaxValue)]
+        [TestCase(int.MinValue, 1, int.MinValue)]
+        [TestCase(int.MaxValue, -1, -int.MaxValue)]
+        public void Divide_ValidInput_Divide2Numbers(int x, int y, long expectedResult)
         {
             //Arrange
             Calculator calculator = new Calculator();
